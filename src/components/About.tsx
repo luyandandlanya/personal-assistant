@@ -32,7 +32,7 @@ export default function About() {
               <span className="text-slate-200 font-medium">
                 Data Analyst &amp; Automation Engineer
               </span>{' '}
-              based in Pretoria, South Africa — currently at{' '}
+              based in Durban, South Africa — currently at{' '}
               <span className="text-cyan-400 font-medium">First Technology Group</span>, one of
               South Africa&apos;s leading managed service providers.
             </p>
@@ -47,9 +47,12 @@ export default function About() {
               My work spans{' '}
               <span className="text-slate-200">IT automation</span>,{' '}
               <span className="text-slate-200">data analytics</span>, and{' '}
-              <span className="text-slate-200">business intelligence</span> — backed by a BCom in
-              Information Systems from UKZN and hands-on experience across real enterprise
-              environments serving multiple clients at scale.
+              <span className="text-slate-200">business intelligence</span> — backed by a BCom
+              Double Major in{' '}
+              <span className="text-slate-200">Information Systems &amp; Technology</span> and{' '}
+              <span className="text-slate-200">Information Systems Computing</span> from UKZN, and
+              hands-on experience across real enterprise environments serving multiple clients at
+              scale.
             </p>
             <p>
               I care about clean process design, measurable outcomes, and building tools that

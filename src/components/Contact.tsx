@@ -38,7 +38,7 @@ const CONTACT_ITEMS = [
   },
   {
     label: 'Location',
-    value: 'Pretoria, South Africa',
+    value: 'Durban, South Africa',
     href: null,
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

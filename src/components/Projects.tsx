@@ -8,9 +8,9 @@ const PROJECTS = [
     badge: 'IT Automation',
     badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
     title: 'OOBE Device Setup Automation',
-    subtitle: 'Zero-touch Windows provisioning at scale',
+    subtitle: 'End-to-end new device setup — unbox to end-user ready',
     description:
-      'Engineered an end-to-end automation that provisions any Windows 10/11 laptop, desktop, or workstation from bare metal to production-ready in under 90 minutes. Uses a custom PPKG built with Windows Configuration Designer — embedded with PowerShell and Batch scripts — integrated with N-Central for remote push execution.',
+      'Engineered an end-to-end automation that takes any new Windows 10/11 laptop, desktop, or workstation from unboxing to fully configured and end-user ready in under 90 minutes. Uses a custom PPKG built with Windows Configuration Designer — embedded with PowerShell and Batch scripts — integrated with N-Central for remote push execution across multiple devices simultaneously.',
     problems: [
       { label: 'Time per device', before: '2–3 hrs', after: '1–1.5 hrs' },
       { label: 'Concurrent setups', before: '1 at a time', after: '5+ simultaneous' },

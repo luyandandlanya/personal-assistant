@@ -44,6 +44,17 @@ const SKILL_CATEGORIES = [
     color: 'emerald',
     skills: ['Admin Droid', 'Microsoft Clarity', 'MetriCool', 'RapidFire', 'Passportal', 'WordPress'],
   },
+  {
+    title: 'Interpersonal Toolkit',
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    color: 'amber',
+    skills: ['Adaptive', 'Determined', 'Collaborative', 'Analytical', 'Vocal'],
+    wide: true,
+  },
 ]
 
 const colorMap: Record<string, string> = {
@@ -51,6 +62,7 @@ const colorMap: Record<string, string> = {
   blue: 'border-blue-500/20 text-blue-400 bg-blue-500/5',
   purple: 'border-purple-500/20 text-purple-400 bg-purple-500/5',
   emerald: 'border-emerald-500/20 text-emerald-400 bg-emerald-500/5',
+  amber: 'border-amber-500/20 text-amber-400 bg-amber-500/5',
 }
 
 const iconBgMap: Record<string, string> = {
@@ -58,6 +70,7 @@ const iconBgMap: Record<string, string> = {
   blue: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
   purple: 'bg-purple-500/10 border-purple-500/20 text-purple-400',
   emerald: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+  amber: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
 }
 
 export default function Skills() {
@@ -81,7 +94,7 @@ export default function Skills() {
               key={cat.title}
               data-animate
               data-animate-delay={String(i * 100)}
-              className="card p-6"
+              className={`card p-6${'wide' in cat && cat.wide ? ' sm:col-span-2' : ''}`}
             >
               {/* Category header */}
               <div className="flex items-center gap-3 mb-5">

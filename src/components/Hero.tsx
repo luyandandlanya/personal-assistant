@@ -47,7 +47,7 @@ export default function Hero() {
         {/* Status badge */}
         <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-8 rounded-full border border-cyan-500/25 bg-cyan-500/5 text-cyan-400 text-sm font-mono animate-fade-in">
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/50 animate-pulse" />
-          Open to opportunities · Pretoria, ZA
+          Open to opportunities · Durban, ZA
         </div>
 
         {/* Name */}
