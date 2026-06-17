@@ -66,6 +66,67 @@ const PROJECTS = [
     ],
     tech: ['C#', 'ASP.NET', 'HTML / CSS', 'MySQL', 'Power BI'],
   },
+  {
+    id: 'service-management',
+    badge: 'Full Stack Dev',
+    badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    title: 'Service Provider Management System',
+    subtitle: 'Staff, stock & compliance tracking for a multi-site contractor',
+    description:
+      'Designed and built two linked apps for a service provider holding maintenance contracts across multiple hospital sites. An Operations app tracks staff attendance, payroll drafts, tool/asset locations, and consumable stock via a ledger model. A Contract & Document Tracker watches tender, certification, and document expiry dates and sends alerts before deadlines — sharing a single contracts table between the two.',
+    problems: [
+      { label: 'Stock balance', before: 'manual count', after: 'ledger-computed' },
+      { label: 'Deadline tracking', before: 'spreadsheet, ad hoc', after: 'automated email alerts' },
+    ],
+    impact: [
+      'Replaced manual attendance sheets with exception-based absence logging',
+      'Stock balances always computed from delivery/usage ledger — never stale, always auditable',
+      'Role-based access via row-level security: owner sees everything, supervisors see only their contracts',
+      'Live system deployed and in use across 9 contracts spanning 6 hospital sites',
+      'Payroll engine rebuilt mid-flight to match the company\'s real-world payslip format with zero downtime',
+    ],
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'Row Level Security', 'FastAPI', 'Python'],
+  },
+  {
+    id: 'doorman-demo',
+    badge: 'Frontend Prototyping',
+    badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+    title: 'Doorman Operations System — Demo',
+    subtitle: 'Clickable multi-store prototype for stakeholder review',
+    description:
+      'Built a clickable demo prototype of an operations system for a multi-store retail brand (4 store locations), used to validate workflow and UI direction with stakeholders before committing to a full build. Deployed live via Cloudflare Pages for instant feedback rounds.',
+    problems: [
+      { label: 'Feedback cycle', before: 'static mockups', after: 'live clickable demo' },
+      { label: 'Store coverage', before: 'single store', after: '4 store locations' },
+    ],
+    impact: [
+      'Gave stakeholders a real, navigable prototype instead of static mockups',
+      'Connected GitHub repo directly to Cloudflare Pages for instant redeploys on every commit',
+      'De-risked the full build by validating UI/UX decisions early and cheaply',
+    ],
+    tech: ['React', 'Vite', 'Tailwind CSS', 'ESLint', 'Cloudflare Pages'],
+  },
+  {
+    id: 'netpath',
+    badge: 'IT Automation',
+    badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+    title: 'NetPath V2 — Network Path Monitoring Engine',
+    subtitle: 'Replacement for N-Central\'s discontinued NetPath feature',
+    description:
+      'Built a multi-target TCP network path monitoring engine to replace N-Central\'s discontinued NetPath feature, after N-able dropped it from the platform. Runs as a pair of persistent Windows Services — one continuously traces network paths to customer-defined targets, detecting latency anomalies, packet loss, route changes, and TCP availability failures; the other serves a live NOC dashboard.',
+    problems: [
+      { label: 'Path visibility', before: 'lost with N-Central', after: 'restored, per-target' },
+      { label: 'Anomaly detection', before: 'none', after: 'latency/loss/route alerts' },
+    ],
+    impact: [
+      'Restored network path visibility lost when N-able discontinued NetPath',
+      'Self-hosted on customer VMs — no per-target licensing cost',
+      'Live NOC dashboard with hop-by-hop diagrams, trend charts, and active alert banners',
+      'Documented for repeatable multi-site deployment — same binaries everywhere, only config and credentials are site-specific',
+      'Automated email alerting on TCP down, latency breach, packet loss breach, and route changes',
+    ],
+    tech: ['PowerShell', 'Windows Services', 'NSSM', 'SMTP', 'HTML/CSS Reporting', 'Chart.js'],
+  },
 ]
 
 export default function Projects() {
