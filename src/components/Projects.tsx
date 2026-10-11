@@ -1,230 +1,51 @@
 'use client'
 
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useState } from 'react'
 
-const PROJECTS = [
-  {
-    id: 'oobe',
-    badge: 'IT Automation',
-    badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    title: 'OOBE Device Setup Automation',
-    subtitle: 'End-to-end new device setup — unbox to end-user ready',
-    description:
-      'Engineered an end-to-end automation that takes any new Windows 10/11 laptop, desktop, or workstation from unboxing to fully configured and end-user ready in under 90 minutes. Uses a custom PPKG built with Windows Configuration Designer — embedded with PowerShell and Batch scripts — integrated with N-Central for remote push execution across multiple devices simultaneously.',
-    problems: [
-      { label: 'Time per device', before: '2–3 hrs', after: '1–1.5 hrs' },
-      { label: 'Concurrent setups', before: '1 at a time', after: '5+ simultaneous' },
-    ],
-    impact: [
-      'Standardised every device setup — zero missed configuration steps',
-      'Eliminated human error across all provisioning steps via scripted execution',
-      'Engineers freed from repetitive setup, redeployed to higher-value work',
-      'New-staff onboarding accelerated — devices ready same day',
-      '5 machines provisioned in 1 hour vs 1 machine per 2 hours previously',
-    ],
-    tech: ['Windows Config Designer', 'PPKG', 'PowerShell', 'Batch Scripting', 'N-Central', 'N-able'],
-  },
-  {
-    id: 'admindroid',
-    badge: 'Data Automation',
-    badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
-    title: 'Admin Droid Reporting Pipeline',
-    subtitle: 'M365 multi-tenant reporting: 12 days → 1 day',
-    description:
-      'Built a fully automated reporting pipeline that transforms scheduled Admin Droid exports (delivered to mailbox) into polished, per-tenant Excel reports. A Power Automate flow moves incoming exports to a watched folder; a Python script then compiles 8 export types × 76 tenants into 76 individual client-ready reports — on demand.',
-    problems: [
-      { label: 'Reporting time', before: '12 days', after: '1 day' },
-      { label: 'Tenants covered', before: 'manual per tenant', after: '76 automated' },
-    ],
-    impact: [
-      '92% reduction in reporting time — from 12 working days to 1',
-      'Eliminated error-prone manual Excel compilation across 76 tenants',
-      'Consistent report structure and formatting every single run',
-      'Scalable: adding new tenants requires zero change to the pipeline',
-      'Improved compliance visibility for all managed clients',
-    ],
-    tech: ['Python', 'Power Automate', 'Admin Droid', 'Excel', 'Mailbox Integration', 'File Automation'],
-  },
-  {
-    id: 'websystem',
-    badge: 'Full Stack Dev',
-    badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    title: 'Healthcare Web System',
-    subtitle: 'Final year group project · UKZN · 75% grade',
-    description:
-      'Led a 4-member team to design and deliver a full-stack client-focused web system for a healthcare provider. Built appointment booking, payment processing, and patient record management as core modules — all designed around operational efficiency for clinic staff.',
-    problems: [
-      { label: 'Team size', before: '4 members', after: 'Group Leader' },
-      { label: 'Final grade', before: 'target: pass', after: '75% achieved' },
-    ],
-    impact: [
-      'Delivered end-to-end appointment booking with calendar management',
-      'Integrated payment processing and receipt generation',
-      'Patient record module with search and history tracking',
-      'Power BI dashboard for clinic operational reporting',
-      'Functional, user-tested solution submitted on time',
-    ],
-    tech: ['C#', 'ASP.NET', 'HTML / CSS', 'MySQL', 'Power BI'],
-  },
-  {
-    id: 'service-management',
-    badge: 'Full Stack Dev',
-    badgeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    title: 'Service Provider Management System',
-    subtitle: 'Staff, stock & compliance tracking for a multi-site contractor',
-    description:
-      'Designed and built two linked apps for a service provider holding maintenance contracts across multiple hospital sites. An Operations app tracks staff attendance, payroll drafts, tool/asset locations, and consumable stock via a ledger model. A Contract & Document Tracker watches tender, certification, and document expiry dates and sends alerts before deadlines — sharing a single contracts table between the two.',
-    problems: [
-      { label: 'Stock balance', before: 'manual count', after: 'ledger-computed' },
-      { label: 'Deadline tracking', before: 'spreadsheet, ad hoc', after: 'automated email alerts' },
-    ],
-    impact: [
-      'Replaced manual attendance sheets with exception-based absence logging',
-      'Stock balances always computed from delivery/usage ledger — never stale, always auditable',
-      'Role-based access via row-level security: owner sees everything, supervisors see only their contracts',
-      'Live system deployed and in use across 9 contracts spanning 6 hospital sites',
-      'Payroll engine rebuilt mid-flight to match the company\'s real-world payslip format with zero downtime',
-    ],
-    tech: ['React', 'Vite', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'Row Level Security', 'FastAPI', 'Python'],
-  },
-  {
-    id: 'doorman-demo',
-    badge: 'Frontend Prototyping',
-    badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    title: 'Doorman Operations System — Demo',
-    subtitle: 'Clickable multi-store prototype for stakeholder review',
-    description:
-      'Built a clickable demo prototype of an operations system for a multi-store retail brand (4 store locations), used to validate workflow and UI direction with stakeholders before committing to a full build. Deployed live via Cloudflare Pages for instant feedback rounds.',
-    problems: [
-      { label: 'Feedback cycle', before: 'static mockups', after: 'live clickable demo' },
-      { label: 'Store coverage', before: 'single store', after: '4 store locations' },
-    ],
-    impact: [
-      'Gave stakeholders a real, navigable prototype instead of static mockups',
-      'Connected GitHub repo directly to Cloudflare Pages for instant redeploys on every commit',
-      'De-risked the full build by validating UI/UX decisions early and cheaply',
-    ],
-    tech: ['React', 'Vite', 'Tailwind CSS', 'ESLint', 'Cloudflare Pages'],
-  },
-  {
-    id: 'netpath',
-    badge: 'IT Automation',
-    badgeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
-    title: 'NetPath V2 — Network Path Monitoring Engine',
-    subtitle: 'Replacement for N-Central\'s discontinued NetPath feature',
-    description:
-      'Built a multi-target TCP network path monitoring engine to replace N-Central\'s discontinued NetPath feature, after N-able dropped it from the platform. Runs as a pair of persistent Windows Services — one continuously traces network paths to customer-defined targets, detecting latency anomalies, packet loss, route changes, and TCP availability failures; the other serves a live NOC dashboard.',
-    problems: [
-      { label: 'Path visibility', before: 'lost with N-Central', after: 'restored, per-target' },
-      { label: 'Anomaly detection', before: 'none', after: 'latency/loss/route alerts' },
-    ],
-    impact: [
-      'Restored network path visibility lost when N-able discontinued NetPath',
-      'Self-hosted on customer VMs — no per-target licensing cost',
-      'Live NOC dashboard with hop-by-hop diagrams, trend charts, and active alert banners',
-      'Documented for repeatable multi-site deployment — same binaries everywhere, only config and credentials are site-specific',
-      'Automated email alerting on TCP down, latency breach, packet loss breach, and route changes',
-    ],
-    tech: ['PowerShell', 'Windows Services', 'NSSM', 'SMTP', 'HTML/CSS Reporting', 'Chart.js'],
-  },
+type Category = 'Automation' | 'Platforms' | 'Web' | 'Intelligence'
+type Project = {
+  title: string; eyebrow: string; category: Category; status: string; number: string;
+  description: string; stack: string[]; proof: string; url?: string
+}
+
+const projects: Project[] = [
+  {number:'01',title:'Everything Tecknology',eyebrow:'IT CONSULTING / BRAND & WEB',category:'Web',status:'Live website',description:'Designed and delivered a modern technology consulting and cybersecurity brand experience — from positioning and content architecture to a responsive website deployed on Cloudflare.',stack:['Astro','TypeScript','Tailwind','Cloudflare'],proof:'Live deployment and brand development',url:'https://everything-tecknology.luyandandlanya.workers.dev'},
+  {number:'02',title:'Endpoint Experience Intelligence',eyebrow:'EUX / ENDPOINT TELEMETRY',category:'Intelligence',status:'V1 in development',description:'A device-experience assessment system built around endpoint telemetry, weighted scoring, data quality, and automated collection. Current work focuses on credible readings and explainable evaluations.',stack:['PowerShell','N-central','Rewst','SQL'],proof:'Five-pillar scoring and collection framework'},
+  {number:'03',title:'NetPath V2',eyebrow:'NETWORK / OBSERVABILITY',category:'Automation',status:'Documented project',description:'Designed a self-hosted network-path monitoring approach with persistent collectors, live operational visibility and alerting for TCP availability, latency, loss and route changes.',stack:['PowerShell','Windows Services','Chart.js','SMTP'],proof:'Network operations architecture and deployment guide'},
+  {number:'04',title:'Team Glory',eyebrow:'OPERATIONS / PRODUCTIVITY',category:'Platforms',status:'Implementation in progress',description:'An internal sprint-operations portal for automation and analytics teams, combining work planning, KPI visibility, database-backed records and repeatable delivery processes.',stack:['Supabase','SQL','Web Apps','Automation'],proof:'Sprint operations portal and system design'},
+  {number:'05',title:'Service Provider Management',eyebrow:'BUSINESS OPERATIONS / FULL STACK',category:'Platforms',status:'Project case study',description:'A connected operations and contract-management platform covering staff, inventory movements, document expiry and role-based access for multi-site service delivery.',stack:['React','Supabase','PostgreSQL','Python'],proof:'Two connected applications and operational workflows'},
+  {number:'06',title:'AdminDroid Reporting Pipeline',eyebrow:'DATA / REPORT AUTOMATION',category:'Automation',status:'Project case study',description:'Automated the transformation of multi-tenant Microsoft 365 exports into consistent per-customer reporting packs, replacing repetitive manual compilation.',stack:['Python','Power Automate','Excel','M365'],proof:'Documented 12-day to 1-day reporting improvement'},
+  {number:'07',title:'Windows Device Provisioning',eyebrow:'ENDPOINT / WORKFLOW AUTOMATION',category:'Automation',status:'Project case study',description:'Automated repeatable Windows workstation setup through provisioning packages, scripting and remote management to reduce manual effort and support concurrent deployments.',stack:['PowerShell','PPKG','N-central','Windows'],proof:'Standardised onboarding workflow'},
+  {number:'08',title:'Doorman Operations Demo',eyebrow:'PRODUCT / PROTOTYPING',category:'Web',status:'Prototype',description:'A clickable multi-store operations prototype created to align stakeholder feedback before full implementation, with Cloudflare-powered preview delivery.',stack:['React','Vite','Tailwind','Cloudflare Pages'],proof:'Interactive demonstration and iteration'},
+  {number:'09',title:'Healthcare Web System',eyebrow:'ACADEMIC / FULL STACK',category:'Platforms',status:'Completed academic project',description:'A team-built healthcare management system covering appointments, patient information, payment workflows and operational reporting.',stack:['C#','ASP.NET','MySQL','Power BI'],proof:'University capstone project'}
 ]
 
+const filters = ['All','Automation','Platforms','Web','Intelligence'] as const
 export default function Projects() {
-  const ref = useScrollAnimation<HTMLElement>()
-
-  return (
-    <section id="projects" ref={ref} className="relative py-28 px-6">
-      <div className="section-divider absolute top-0 left-0 right-0" />
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div data-animate className="mb-14">
-          <span className="text-cyan-400 font-mono text-sm mb-3 block tracking-widest">
-            03 // projects
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100">Featured Work</h2>
-          <p className="text-slate-400 mt-3 text-base max-w-xl">
-            Projects built to solve real problems — measured in time saved, errors eliminated, and
-            throughput multiplied.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-8">
-          {PROJECTS.map((project, i) => (
-            <div
-              key={project.id}
-              data-animate
-              data-animate-delay={String(i * 120)}
-              className="card p-7 group"
-            >
-              {/* Top row */}
-              <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
-                <div>
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-medium border mb-3 ${project.badgeColor}`}
-                  >
-                    {project.badge}
-                  </span>
-                  <h3 className="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm mt-1 font-mono">{project.subtitle}</p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">{project.description}</p>
-
-              {/* Before / After metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                {project.problems.map((p) => (
-                  <div key={p.label} className="rounded-lg bg-slate-800/40 border border-slate-700/50 p-3">
-                    <div className="text-xs text-slate-500 font-mono mb-2">{p.label}</div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs text-red-400/70 line-through">{p.before}</span>
-                      <svg className="w-3 h-3 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                      <span className="text-sm font-bold text-emerald-400">{p.after}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Impact bullets */}
-              <div className="mb-6">
-                <div className="text-xs font-mono text-slate-500 mb-3 tracking-widest">IMPACT</div>
-                <ul className="space-y-2">
-                  {project.impact.map((point) => (
-                    <li key={point} className="flex items-start gap-2.5 text-sm text-slate-400">
-                      <svg
-                        className="w-3.5 h-3.5 text-cyan-500 mt-0.5 shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Tech stack */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 rounded-md text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700/50"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+  const [filter,setFilter]=useState<(typeof filters)[number]>('All')
+  const visible=filter==='All'?projects:projects.filter(p=>p.category===filter)
+  return <section id="projects" className="portfolio-section relative px-6 py-28">
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-7 mb-10">
+        <div><p className="section-kicker">02 / SELECTED ENGINEERING WORK</p><h2 className="section-title">Proof, not <span className="text-royal">buzzwords.</span></h2><p className="text-slate-400 max-w-2xl mt-4 leading-relaxed">A cross-section of automation systems, operational platforms, digital products and data engineering. Each project starts with a real problem.</p></div>
+        <div className="text-sm font-mono text-slate-500">{String(projects.length).padStart(2,'0')} PROJECTS / GROWING</div>
       </div>
-    </section>
-  )
+      <div className="flex gap-2 overflow-x-auto pb-5 mb-5" aria-label="Filter projects">
+        {filters.map(item=><button key={item} onClick={()=>setFilter(item)} aria-pressed={filter===item} className={'filter-chip '+(filter===item?'filter-chip-active':'')}>{item}</button>)}
+      </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        {visible.map((p,index)=><article key={p.number} className={'project-panel group '+(index===0&&filter==='All'?'md:col-span-2 featured-panel':'')}>
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex flex-wrap justify-between items-center gap-3 mb-9"><span className="text-xs font-mono tracking-widest text-blue-300">{p.eyebrow}</span><span className="text-xs text-slate-400 border border-white/10 rounded-full px-3 py-1">{p.status}</span></div>
+            <div className="mt-auto"><div className="text-5xl font-semibold text-white/10 mb-4 tracking-tight">{p.number}</div><h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">{p.title}</h3><p className="text-slate-400 leading-relaxed max-w-2xl mb-6">{p.description}</p>
+              <div className="mb-6 flex items-center gap-2 text-sm text-slate-300"><span className="w-1.5 h-1.5 rounded-full bg-blue-500"/>{p.proof}</div>
+              <div className="flex flex-wrap gap-2">{p.stack.map(s=><span className="stack-chip" key={s}>{s}</span>)}</div>
+              {p.url&&<a className="inline-flex items-center gap-2 mt-7 font-medium text-blue-300 hover:text-white transition-colors" href={p.url} target="_blank" rel="noopener noreferrer">Explore live site <span aria-hidden="true">↗</span></a>}
+            </div>
+          </div>
+        </article>)}
+      </div>
+      <p className="mt-7 text-sm text-slate-500">Selected client and internal systems are described at a high level to protect confidential implementation details. Project status is shown where work is ongoing.</p>
+    </div>
+  </section>
 }
