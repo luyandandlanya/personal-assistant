@@ -1,6 +1,6 @@
 'use client'
 import {useEffect,useState} from 'react'
-const links=[{label:'About',href:'#about'},{label:'Expertise',href:'#skills'},{label:'Work',href:'#projects'},{label:'Experience',href:'#experience'},{label:'Credentials',href:'#certifications'}]
+const links=[{label:'About',href:'#about'},{label:'Expertise',href:'#skills'},{label:'Work',href:'#projects'},{label:'Services',href:'#services'},{label:'Experience',href:'#experience'},{label:'Credentials',href:'#certifications'}]
 export default function Navigation(){
  const [open,setOpen]=useState(false),[scrolled,setScrolled]=useState(false)
  useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>18);onScroll();window.addEventListener('scroll',onScroll,{passive:true});return()=>window.removeEventListener('scroll',onScroll)},[])
