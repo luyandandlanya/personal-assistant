@@ -10,7 +10,7 @@ export default function Hero() {
       <p className="text-white/70 text-lg mb-3">Luyanda Ndlanya</p>
       <h1 className="text-white font-black tracking-[-.065em] leading-[.99] text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] max-w-5xl">Building smarter <span className="gradient-text">systems.</span><br/>Solving real problems.</h1>
       <p className="mt-9 max-w-2xl text-lg md:text-xl text-slate-400 leading-relaxed">I turn complex IT operations into connected, automated and measurable solutions — from enterprise workflows and endpoint intelligence to custom digital products.</p>
-      <div className="flex flex-wrap gap-4 mt-10"><a href="#projects" className="px-7 py-4 rounded-lg bg-[#2855ff] text-white font-semibold hover:bg-[#4169ff] transition-colors">Explore selected work <span aria-hidden="true">↗</span></a><a href="#about" className="px-7 py-4 rounded-lg border border-white/20 text-white font-medium hover:border-blue-500 transition-colors">My approach</a></div>
+      <div className="flex flex-wrap gap-4 mt-10"><a href="#projects" className="px-7 py-4 rounded-lg bg-[#2855ff] text-white font-semibold hover:bg-[#4169ff] transition-colors">Explore selected work <span aria-hidden="true">↗</span></a><a href="#contact" className="px-7 py-4 rounded-lg border border-white/20 text-white font-medium hover:border-blue-500 transition-colors">Discuss a project</a></div>
     </div>
     <div className="hidden lg:flex flex-col gap-6 border-l border-blue-500/30 pl-6 text-xs font-mono text-slate-400 tracking-wider"><span>01 / AUTOMATION</span><span>02 / INTELLIGENCE</span><span>03 / PLATFORMS</span><span>04 / DEVELOPMENT</span><div className="w-px h-24 bg-gradient-to-b from-blue-500 to-transparent ml-1"/></div>
   </div>
